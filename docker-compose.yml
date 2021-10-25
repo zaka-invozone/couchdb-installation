@@ -4,6 +4,17 @@ networks:
   network:
 
 services:
+  haproxy:
+    image: haproxy:1.7
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    ports:
+      - "5000:8080"
+    networks:
+      network:
+        aliases:
+          - haproxy.docker.com
+
   server-0:
     environment:
       COUCHDB_PASSWORD: -pbkdf2-847043acc65626c8eb98da6d78682fbc493a1787,f7b1a3e4b624f4f0bbfe87e96841eda0,10
